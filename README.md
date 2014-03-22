@@ -9,6 +9,8 @@ Demo
 ----
 Preview it here: https://rawgithub.com/kenrick95/Lockscreen/master/index.html
 
+After I tried using different browsers, surprisingly Internet Explorer 11 gives the best view.
+
 Attribution & license
 ----
 
