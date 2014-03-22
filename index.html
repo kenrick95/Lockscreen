@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Windows Lockscreen</title>
+<style>
+* {	
+	padding:0;
+	margin:0;
+}
+html {
+	height: 100%;
+	font-family: Segoe UI, Ubuntu, Arial, sans-serif;
+}
+body {
+	background-image:url(https://upload.wikimedia.org/wikipedia/commons/7/7a/DanauToba20110608-1.jpg);
+	background-size: cover;
+	background-position:center;
+}
+#content {
+	width: 100%;
+	height: 100%;
+}
+#real {
+	position:absolute;
+	top: 50%;
+	left: 5em;
+	color:white;
+	font-weight: lighter;
+}
+#time {
+	display: inline-block;
+	font-size: 8em;
+	line-height: 1.2em;
+}
+#task {
+	display: inline-block;
+	margin-left:1.5em;
+	font-weight: normal;
+}
+#date {
+	font-size: 3em;
+}
+#status {
+	margin-top: 2em;
+	margin-left: 1em;
+	display: inline-block;
+}
+#network {
+	display: inline-block;
+	width: 35px;
+	height: 35px;
+	background-image: url("connection.png");
+	background-size: contain;
+	text-align:center;
+}
+#battery {
+	margin-left: 2em;
+	display: inline-block;
+	width: 35px;
+	height: 35px;
+	background-image: url("charging.png");
+	background-size: contain;
+	text-align:center;
+}
+#notification {
+	margin-left: 10em;
+	display: inline-block;
+}
+.notification {
+	display: inline-block;
+	margin-left: 3em;
+	width: 55px;
+	height: 35px;
+	text-align:center;
+	font-weight: bold;
+	line-height: 30px;
+}
+.notification-icon {
+	display: inline-block;
+	width: 35px;
+	height: 35px;
+	text-align:center;
+	background-size: contain;
+}
+.notification-icon.fb {
+	background-image: url("fb.png");
+}
+.notification-icon.gh {
+	background-image: url("gh.png");
+}
+.notification-icon.tw {
+	background-image: url("tw.png");
+}
+</style>
+</head>
+
+<body>
+	<div id="content">
+    	<div id="real">
+            <div id="time">4:27</div>
+            <div id="task"></div>
+            <div id="date">Saturday, 22 March</div>
+            <div id="status">
+                <div id="network"></div>
+                <div id="battery"></div>
+            </div>
+            <div id="notification">
+                <div class="notification"><span class="notification-icon fb"></span> 3</div>
+                <div class="notification"><span class="notification-icon tw"></span> 2</div>
+                <div class="notification"><span class="notification-icon gh"></span> 1</div>
+            </div>
+        </div>
+    </div>
+    <script>
+		document.addEventListener("DOMContentLoaded", function () {
+			function monthName (number) {
+				switch(number + 1) {
+					case 1: return "January";	
+					case 2: return "February";
+					case 3: return "March";
+					case 4: return "April";
+					case 5: return "May";
+					case 6: return "June";	
+					case 7: return "July";
+					case 8: return "August";
+					case 9: return "September";
+					case 10: return "October";
+					case 11: return "November";
+					case 12: return "December";
+				}
+			}
+			function dayName (number) {
+				switch(number) {
+					case 0: return "Sunday";	
+					case 1: return "Monday";
+					case 2: return "Tuesday";
+					case 3: return "Wednesday";
+					case 4: return "Thursday";
+					case 5: return "Friday";
+					case 6: return "Saturday";
+				}
+			}
+			function pad(number) {
+				return (number < 10) ? "0" + number.toString() : number;	
+			}
+			function updateTime() {
+				var now = new Date();
+				var time = (now.getHours() % 12) + ":" + pad(now.getMinutes());
+				var date = dayName(now.getDay()) + ", " + now.getDate() + " " + monthName( now.getMonth());
+				document.getElementById("time").innerHTML = time;
+				document.getElementById("date").innerHTML = date;
+				//window.requestAnimationFrame(updateTime);
+				setTimeout(updateTime, 1000);
+			}
+			updateTime();
+		}, false);
+		
+	</script>
+</body>
+</html>
